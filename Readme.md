@@ -1,17 +1,21 @@
 # fink-octave-scripts
 
 Written by Alexander Hansen <alexkhansen@users.sourceforge.net>.
+
 Based on  script designs by Johnathan Stickel.
 
 See the COPYING file for license information.
 
-fink-octave-scripts contains convenience scripts to make maintaining the various
+_fink-octave-scripts_ contains convenience scripts to make maintaining the various
 Octave Forge (OF) (or whatever they ultimately call them) packages in Fink easier.
+
+## Scripts 
 
 This package consists of the following scripts:
 
-* **octave-forge-patch.sh**:  This is the master script, generated from 
-at install time from octave-forge-patch.sh.in by substituting in the Fink prefix.  
+* **octave-forge-patch.sh**:  
+This is the master script, generated at install time from octave-forge-patch.sh.in 
+by substituting in the Fink prefix.  
 This script generates shell and Octave compile, install, post-install, and pre-remove
 scripts for each OF package at build time from templates installed by _this_ package.  
 The post-install and pre-remove scripts are needed at .deb install and remove time, so 
@@ -60,7 +64,7 @@ which is called by the PreRmScript and runs **octave-forge-postinst**.
 * octave-forge-prerm:  Template for the post-install Octave script **octave-forge-prerm**,
 which removes the package's entry from global Octave package database.
 
-Usage:
+## Usage:
 
 These scripts should be used in a .info file as follows:
 
