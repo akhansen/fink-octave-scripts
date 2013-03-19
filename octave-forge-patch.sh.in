@@ -1,0 +1,29 @@
+#!/bin/sh -ev
+if [ $UID -ne 0 ]
+then 
+	echo "$1 cannot be built with --build-as-nobody"
+	exit 1
+fi
+octvers=$3
+subst1="s,@PKG@,$1,g"
+subst2="s,@PKGVERS@,$2,g"
+subst3="s,@OCTVERS@,$octvers,g"
+subst4="s,@BUILDDIR@,$4,g"
+subst5="s,@INSTDIR@,$5,g"
+subst6="s,@PKGSRC@,$6,g"
+for scriptfile in octave-forge-install.sh octave-forge-inst \
+				  octave-forge-postinst.sh octave-forge-postinst \
+				  octave-forge-prerm.sh octave-forge-prerm; do 
+	sed -e $subst1 -e $subst2 -e $subst3 -e $subst4 -e $subst5 @FINKPREFIX@/share/fink-octave-scripts/$scriptfile.in > $scriptfile
+	chmod a+x $scriptfile
+done
+if [[ "$octvers" > "3.4.0" ]] ; then
+	oc_shell_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-compile-3.4.3.sh.in"
+	oc_oct_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-comp-3.4.3.in"
+else
+	oc_shell_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-compile-3.0.5.sh.in"
+	oc_oct_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-comp-3.0.5.in"
+fi
+sed -e $subst1 -e $subst3 -e $subst4 -e $subst6 $oc_shell_script > octave-forge-compile.sh
+sed -e $subst1 -e $subst3  $oc_oct_script > octave-forge-comp
+chmod a+x octave-forge-comp*

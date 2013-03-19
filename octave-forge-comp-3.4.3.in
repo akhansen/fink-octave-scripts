@@ -1,0 +1,4 @@
+#!@FINKPREFIX@/bin/octave-@OCTVERS@ -V
+pkg prefix bld/share/octave/@OCTVERS@/packages bld/lib/octave/@OCTVERS@/packages
+pkg global_list bld/share/octave/@OCTVERS@/octave_packages
+pkg install -verbose -nodeps ./@PKG@.tar

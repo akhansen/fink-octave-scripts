@@ -1,0 +1,8 @@
+#!/bin/sh -ev
+cd @INSTDIR@
+cp -r @BUILDDIR@/../bld/{share,lib} .
+`which xvfb-run` @BUILDDIR@/octave-forge-inst
+mv share/octave/@OCTVERS@/octave_packages share/octave/@OCTVERS@/packages/@PKG@-@PKGVERS@/.
+mkdir -p share/octave/@OCTVERS@/@PKG@
+# copy postinst/prerm scripts
+cp @BUILDDIR@/octave-forge-{prerm,postinst,prerm.sh,postinst.sh} @INSTDIR@/share/octave/@OCTVERS@/@PKG@

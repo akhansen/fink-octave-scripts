@@ -1,0 +1,8 @@
+#!/sw/bin/octave-@OCTVERS@ -q
+#starts in %b/../bld
+load share/octave/@OCTVERS@/octave_packages;
+apfx = global_packages {1}.archprefix;
+global_packages {1}.archprefix = regexprep(apfx,'.*bld','/sw');
+dr = global_packages {1}.dir;
+global_packages {1}.dir = regexprep(dr,'.*bld','/sw');
+save -text share/octave/@OCTVERS@/octave_packages global_packages

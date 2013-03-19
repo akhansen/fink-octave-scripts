@@ -1,0 +1,6 @@
+#!/bin/sh
+printf "Unregistering %s package with Octave-%s...\n" @PKG@ @OCTVERS@
+`which xvfb-run` @FINKPREFIX@/share/octave/@OCTVERS@/@PKG@/octave-forge-prerm
+printf "Done.\n"
+
+

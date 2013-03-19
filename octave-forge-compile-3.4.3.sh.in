@@ -1,0 +1,7 @@
+#!/bin/sh -ev
+# repack tarball, since octave-3.4.0+ appears not to want to install
+# from directories
+cd ..
+tar -cf @PKG@.tar @PKGSRC@
+mkdir -p bld/share/octave/@OCTVERS@/packages bld/lib/octave/@OCTVERS@/packages
+`which xvfb-run` @BUILDDIR@/octave-forge-comp
