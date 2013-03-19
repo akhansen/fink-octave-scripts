@@ -1,4 +1,4 @@
-fink-octave-scripts
+# fink-octave-scripts
 
 Written by Alexander Hansen <alexkhansen@users.sourceforge.net>.
 Based on  script designs by Johnathan Stickel.
@@ -10,7 +10,7 @@ Octave Forge (OF) (or whatever they ultimately call them) packages in Fink easie
 
 This package consists of the following scripts:
 
-* octave-forge-patch.sh:  This is the master script, generated from 
+* **octave-forge-patch.sh**:  This is the master script, generated from 
 at install time from octave-forge-patch.sh.in by substituting in the Fink prefix.  
 This script generates shell and Octave compile, install, post-install, and pre-remove
 scripts for each OF package at build time from templates installed by _this_ package.  
@@ -65,11 +65,11 @@ Usage:
 These scripts should be used in a .info file as follows:
 
 CompileScript: <<
-# $pkgsrc is typically either "%type_raw[forge]" or "%type_raw[forge]-%v"
+\# $pkgsrc is typically either "%type_raw[forge]" or "%type_raw[forge]-%v"
 
 %p/share/fink-octave-scripts/octave-forge-patch.sh %type_raw[forge] %v %type_raw[oct] %b %i $pkgsrc
 
-# The above generates all of the other scripts appropriately for the package
+\# The above generates all of the other scripts appropriately for the package
 
 ./octave-forge-compile.sh
 <<
