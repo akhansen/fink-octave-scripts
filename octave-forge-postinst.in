@@ -1,6 +1,6 @@
-#!/sw/bin/octave-@OCTVERS@ -q
-load /sw/share/octave/@OCTVERS@/packages/@PKG@-@PKGVERS@/octave_packages
+#!@FINKPREFIX@/bin/octave-@OCTVERS@ -q
+load @FINKPREFIX@/share/octave/@OCTVERS@/packages/@PKG@-@PKGVERS@/octave_packages
 newpackage = global_packages;
-load /sw/var/octave/@OCTVERS@/octave_packages
+load @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages
 global_packages = {global_packages{:},newpackage{:}};
-save -text /sw/var/octave/@OCTVERS@/octave_packages global_packages
+save -text @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages global_packages

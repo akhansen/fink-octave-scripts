@@ -1,9 +1,9 @@
-#!/sw/bin/octave-@OCTVERS@ -q
-load /sw/var/octave/@OCTVERS@/octave_packages
+#!@FINKPREFIX@/bin/octave-@OCTVERS@ -q
+load @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages
 for i = 1:length(global_packages)
   if strcmp(global_packages{i}.name,'@PKG@')
     global_packages(i) = [];
     break
   endif
 endfor
-save -text /sw/var/octave/@OCTVERS@/octave_packages global_packages
+save -text @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages global_packages
