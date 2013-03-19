@@ -31,12 +31,12 @@ Octave-3.4.3 or later, then invokes **octave-forge-comp**.
 * **octave-forge-comp-(3.0.5|3.4.3).in**:  Template for the compile phase Octave script. One 
 of these gets converted to **octave-forge-comp**; again, which one depends on the Octave 
 version the package is being installed for.  This runs the package's internal build 
-procedure and installs it in a temporary location (**%b../bld**) with a temporary database 
-(**bld/share/octave/\<octave version\>/octave\_packages**).
+procedure and installs it in a temporary location ( **%b../bld** ) with a temporary database 
+( **bld/share/octave/\<octave version\>/octave\_packages** ).
 
 * **octave-forge-install.sh.in**:  Template for the install phase shell script
 **octave-forge-install.sh**, which does the install phase filesystem operations, 
-including copying the installed files over to the  .deb root directory (**%i**) as well as 
+including copying the installed files over to the  .deb root directory ( **%i** ) as well as 
 invoking **octave-forge-inst**.
 
 * **octave-forge-inst.in**:  Template for the install phase Octave script 
@@ -46,7 +46,7 @@ files will actually be installed.
 
 * **octave-forge-postinst.sh.in**:  Template for the shell script **octave-forge-postinst.sh**
 which is called by the PostInstScript, which verifies whether the global Octave 
-package database (**%p/var/octave/\<octave version\>/octave\_packages**) is a regular file of 
+package database ( **%p/var/octave/\<octave version\>/octave\_packages** ) is a regular file of 
 nonzero size, and therefore presumably a valid Octave database file.  If not, we remove the
 existing file (in case it's a directory) and copy 
 **%p/share/octave/\<octave version\>/octave_packages** over it.  If not, we run 
@@ -54,8 +54,8 @@ existing file (in case it's a directory) and copy
 
 * **octave-forge-postinst.in**:  Template for the post-install Octave script 
 **octave-forge-postinst**, which appends the information from 
-%p/share/octave/\<octave version\>/octave\_packages into 
-%p/var/octave/\<octave version\>/octave\_packages.
+**%p/share/octave/\<octave version\>/octave\_packages** into 
+**%p/var/octave/\<octave version\>/octave\_packages**.
 
 * **octave-forge-prerm.sh.in**:  Template for the shell script **octave-forge-prerm.sh**
 which is called by the PreRmScript and runs **octave-forge-postinst**.
@@ -68,11 +68,11 @@ which removes the package's entry from global Octave package database.
 These scripts should be used in a .info file as follows:
 
     CompileScript: <<
-    \# $pkgsrc is typically either "%type_raw[forge]" or "%type_raw[forge]-%v"
+    # $pkgsrc is typically either "%type_raw[forge]" or "%type_raw[forge]-%v"
 
     %p/share/fink-octave-scripts/octave-forge-patch.sh %type_raw[forge] %v %type_raw[oct] %b %i $pkgsrc
 
-    \# The above generates all of the other scripts appropriately for the package
+    # The above generates all of the other scripts appropriately for the package
 
     ./octave-forge-compile.sh
     <<
