@@ -1,3 +1,5 @@
+2013-04-07	0.1.2	Fix for Octave < 3.4
+
 2013-03-19	0.1.1	Fix hardcoded /sw 
 
 2013-03-18  0.1.0	Initial release

@@ -25,5 +25,5 @@ else
 	oc_oct_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-comp-3.0.5.in"
 fi
 sed -e $subst1 -e $subst3 -e $subst4 -e $subst6 $oc_shell_script > octave-forge-compile.sh
-sed -e $subst1 -e $subst3  $oc_oct_script > octave-forge-comp
+sed -e $subst1 -e $subst3 -e $subst6 $oc_oct_script > octave-forge-comp
 chmod a+x octave-forge-comp*
