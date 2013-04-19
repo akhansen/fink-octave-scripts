@@ -1,0 +1,13 @@
+#!/bin/sh -ev
+mkdir -p @BUILDDIR@/bin
+pushd @BUILDDIR@/bin
+# generate Fink-gcc enabled mkoctfile
+cp "@FINKPREFIX@/bin/mkoctfile-@OCTVERS@" "mkoctfile-@OCTVERS@-gcc$1"
+perl -pi -e "	s,oct\-cc,@FINKPREFIX@/bin/gcc-fsf-$1,g; \
+  				s,oct\-cxx,@FINKPREFIX@/bin/g++-fsf-$1,g" \
+    			"mkoctfile-@OCTVERS@-gcc$1" 
+ # create convenience symlink
+ln -s "mkoctfile-@OCTVERS@-gcc$1" "mkoctfile-gcc$1" 
+popd
+chmod a+x bin/mkoctfile*
+

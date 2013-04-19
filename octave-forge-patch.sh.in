@@ -26,4 +26,6 @@ else
 fi
 sed -e $subst1 -e $subst3 -e $subst4 -e $subst6 $oc_shell_script > octave-forge-compile.sh
 sed -e $subst1 -e $subst3 -e $subst6 $oc_oct_script > octave-forge-comp
+sed -e $subst3 -e $subst4 @FINKPREFIX@/share/fink-octave-scripts/genmkoctfile.sh.in > genmkoctfile.sh
 chmod a+x octave-forge-comp*
+chmod a+x genmkoctfile.sh
