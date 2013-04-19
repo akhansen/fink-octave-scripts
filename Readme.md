@@ -21,6 +21,11 @@ templates installed by _this_ package.  The post-install and pre-remove scripts 
 at .deb install and remove time, so  they are installed in the OF package, to be run in 
 the `PostInstScript` or `PreRmScript`, respectively.
 
+* **genmkoctfile.sh.in**:  Template for the compile phase shell script **genmkoctfile.sh**,
+which is used to generate **mkoctfile-3XY-gcc4.N** and **mkoctfile-gcc4.N** executables 
+when a gcc4N different than that which Octave was built with is required.  It takes the
+major version of the compiler, e.g. 4.8, as an argument.
+
 * **octave-forge-compile-(3.0.5|3.4.3).sh.in**:  Template for the compile phase shell script.
 One of these gets converted by **octave-forge-patch.sh** to **octave-forge-compile.sh**; 
 which one depends on the Octave version the package is being installed for--Octave 3.4.0 
@@ -69,8 +74,15 @@ These scripts should be used in a .info file as follows:
 
     CompileScript: <<
     # $pkgsrc is typically either "%type_raw[forge]" or "%type_raw[forge]-%v"
-
+	
+	pkgsrc=%type_raw_forge
+	
     %p/share/fink-octave-scripts/octave-forge-patch.sh %type_raw[forge] %v %type_raw[oct] %b %i $pkgsrc
+
+	# if the package needs an alternate mkoctfile, then
+	# ./genmkoctfile.sh
+	# export PATH="%b/bin:$PATH"
+	# and patch the build process to use e.g. mkoctfile-gcc4.N
 
     # The above generates all of the other scripts appropriately for the package
 
