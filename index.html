@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Fink-octave-scripts by akhansen</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Fink-octave-scripts</h1>
+          <h2>Build, install, post-install, and pre-remove scripts for Fink's Octave Forge packages.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/akhansen/fink-octave-scripts/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/akhansen/fink-octave-scripts/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/akhansen/fink-octave-scripts" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>fink-octave-scripts</h1>
+
+<p>Written by Alexander Hansen <a href="mailto:alexkhansen@users.sourceforge.net">alexkhansen@users.sourceforge.net</a>.</p>
+
+<p>Based on  script designs by Johnathan Stickel.</p>
+
+<p>See the <strong>COPYING</strong> file for license information.</p>
+
+<p><em>fink-octave-scripts</em> contains convenience scripts to make maintaining the various
+Octave Forge (OF) (or whatever they ultimately call them) packages in Fink easier.</p>
+
+<h2>Scripts</h2>
+
+<p>This package consists of the following scripts:</p>
+
+<ul>
+<li><p><strong>octave-forge-patch.sh</strong>:<br>
+This is the master script, generated at install time from <strong>octave-forge-patch.sh.in</strong>
+by substituting in the Fink prefix.  This script generates shell and Octave compile, 
+install, post-install, and pre-remove scripts for each OF package at build time from 
+templates installed by <em>this</em> package.  The post-install and pre-remove scripts are needed
+at .deb install and remove time, so  they are installed in the OF package, to be run in 
+the <code>PostInstScript</code> or <code>PreRmScript</code>, respectively.</p></li>
+<li><p><strong>genmkoctfile.sh.in</strong>:  Template for the compile phase shell script <strong>genmkoctfile.sh</strong>,
+which is used to generate <strong>mkoctfile-3XY-gcc4.N</strong> and <strong>mkoctfile-gcc4.N</strong> executables 
+when a gcc4N different than that which Octave was built with is required.  It takes the
+major version of the compiler, e.g. 4.8, as an argument.</p></li>
+<li><p><strong>octave-forge-compile-(3.0.5|3.4.3).sh.in</strong>:  Template for the compile phase shell script.
+One of these gets converted by <strong>octave-forge-patch.sh</strong> to <strong>octave-forge-compile.sh</strong>; 
+which one depends on the Octave version the package is being installed for--Octave 3.4.0 
+and later only support installation from an archive. <strong>octave-forge-compile.sh</strong> performs
+some file system operations and creates a post-patch tarball if installing for 
+Octave-3.4.3 or later, then invokes <strong>octave-forge-comp</strong>.</p></li>
+<li><p><strong>octave-forge-comp-(3.0.5|3.4.3).in</strong>:  Template for the compile phase Octave script. One 
+of these gets converted to <strong>octave-forge-comp</strong>; again, which one depends on the Octave 
+version the package is being installed for.  This runs the package's internal build 
+procedure and installs it in a temporary location ( <strong>%b../bld</strong> ) with a temporary database 
+( <strong>bld/share/octave/&lt;octave version&gt;/octave_packages</strong> ).</p></li>
+<li><p><strong>octave-forge-install.sh.in</strong>:  Template for the install phase shell script
+<strong>octave-forge-install.sh</strong>, which does the install phase filesystem operations, 
+including copying the installed files over to the  .deb root directory ( <strong>%i</strong> ) as well as 
+invoking <strong>octave-forge-inst</strong>.</p></li>
+<li><p><strong>octave-forge-inst.in</strong>:  Template for the install phase Octave script 
+<strong>octave-forge-inst</strong>, which changes the path information in 
+<strong>%i/share/octave/&lt;octave version&gt;/octave_packages</strong> to match where the
+files will actually be installed.</p></li>
+<li><p><strong>octave-forge-postinst.sh.in</strong>:  Template for the shell script <strong>octave-forge-postinst.sh</strong>
+which is called by the PostInstScript, which verifies whether the global Octave 
+package database ( <strong>%p/var/octave/&lt;octave version&gt;/octave_packages</strong> ) is a regular file of 
+nonzero size, and therefore presumably a valid Octave database file.  If not, we remove the
+existing file (in case it's a directory) and copy 
+<strong>%p/share/octave/&lt;octave version&gt;/octave_packages</strong> over it.  If not, we run 
+<strong>octave-forge-postinst</strong>.</p></li>
+<li><p><strong>octave-forge-postinst.in</strong>:  Template for the post-install Octave script 
+<strong>octave-forge-postinst</strong>, which appends the information from 
+<strong>%p/share/octave/&lt;octave version&gt;/octave_packages</strong> into 
+<strong>%p/var/octave/&lt;octave version&gt;/octave_packages</strong>.</p></li>
+<li><p><strong>octave-forge-prerm.sh.in</strong>:  Template for the shell script <strong>octave-forge-prerm.sh</strong>
+which is called by the PreRmScript and runs <strong>octave-forge-postinst</strong>.</p></li>
+<li><p><strong>octave-forge-prerm</strong>:  Template for the post-install Octave script <strong>octave-forge-prerm</strong>,
+which removes the package's entry from global Octave package database.</p></li>
+</ul><h2>Usage:</h2>
+
+<p>These scripts should be used in a .info file as follows:</p>
+
+<pre><code>CompileScript: &lt;&lt;
+# $pkgsrc is typically either "%type_raw[forge]" or "%type_raw[forge]-%v"
+
+pkgsrc=%type_raw_forge
+
+%p/share/fink-octave-scripts/octave-forge-patch.sh %type_raw[forge] %v %type_raw[oct] %b %i $pkgsrc
+
+# if the package needs an alternate mkoctfile, then
+# ./genmkoctfile.sh
+# export PATH="%b/bin:$PATH"
+# and patch the build process to use e.g. mkoctfile-gcc4.N
+
+# The above generates all of the other scripts appropriately for the package
+
+./octave-forge-compile.sh
+&lt;&lt;
+
+InstallScript: ./octave-forge-install.sh
+
+PostInstScript:  %p/share/octave/%type_raw[oct]/%type_raw[forge]/octave-forge-postinst.sh
+
+PreRmScript: %p/share/octave/%type_raw[oct]/%type_raw[forge]/octave-forge-prerm.sh
+</code></pre>
+        </section>
+
+        <footer>
+          Fink-octave-scripts is maintained by <a href="https://github.com/akhansen">akhansen</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
