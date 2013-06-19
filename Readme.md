@@ -75,7 +75,7 @@ These scripts should be used in a .info file as follows:
     CompileScript: <<
     # $pkgsrc is typically either "%type_raw[forge]" or "%type_raw[forge]-%v"
 	
-	pkgsrc=%type_raw_forge
+	pkgsrc=%type_raw[forge]
 	
     %p/share/fink-octave-scripts/octave-forge-patch.sh %type_raw[forge] %v %type_raw[oct] %b %i $pkgsrc
 
