@@ -1,4 +1,6 @@
-2014-04-18  0.2.0   Add script to generate temporary mkoctfile using gcc other
+2014-05-06  0.3.0   Put the oct-cc and oct-cxx wrappers in this package.
+
+2013-04-18  0.2.0   Add script to generate temporary mkoctfile using gcc other
 					than what Octave was built with.
 
 2013-04-07	0.1.2	Fix for Octave < 3.4

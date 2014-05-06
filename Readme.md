@@ -14,7 +14,7 @@ Octave Forge (OF) (or whatever they ultimately call them) packages in Fink easie
 This package consists of the following scripts:
 
 * **octave-forge-patch.sh**:  
-This is the master script, generated at install time from **octave-forge-patch.sh.in**
+This is the master build script, generated at install time from **octave-forge-patch.sh.in**
 by substituting in the Fink prefix.  This script generates shell and Octave compile, 
 install, post-install, and pre-remove scripts for each OF package at build time from 
 templates installed by _this_ package.  The post-install and pre-remove scripts are needed
@@ -68,6 +68,10 @@ which is called by the PreRmScript and runs **octave-forge-postinst**.
 * **octave-forge-prerm**:  Template for the post-install Octave script **octave-forge-prerm**,
 which removes the package's entry from global Octave package database.
 
+* **oct-cc** and **oct-cxx**:  Fink's Octave packages encode "oct-cc" and "oct-cxx" as the names of the compilers
+for Octave to use, because the proper compiler changes around a lot between OS X versions (and sometimes even 
+within an OS X version).  These scripts select the proper Fink compiler wrapper for the running OS.
+
 ## Usage:
 
 These scripts should be used in a .info file as follows:
@@ -94,3 +98,5 @@ These scripts should be used in a .info file as follows:
     PostInstScript:  %p/share/octave/%type_raw[oct]/%type_raw[forge]/octave-forge-postinst.sh
 
     PreRmScript: %p/share/octave/%type_raw[oct]/%type_raw[forge]/octave-forge-prerm.sh
+
+oct-cc and oct-cxx typically aren't used manually, but are invoked via mkoctfile.
