@@ -1,7 +1,7 @@
 #!/bin/sh
 osversion=`uname -r | cut -d. -f1`
 case $osversion in
-	1[3) 
+	13) 
 		COMPILER=@FINKPREFIX@/var/lib/fink/path-prefix-libcxx/c++ ;;
 	1[12]) 
 		COMPILER=@FINKPREFIX@/var/lib/fink/path-prefix-clang/c++ ;;
@@ -9,7 +9,7 @@ case $osversion in
 		COMPILER=@FINKPREFIX@/var/lib/fink/path-prefix-10.6/c++ ;;
 	9)  if [ "%m" = "x86_64" ]
 			# use 10.6 gcc++4.2 compiler wrapper on 10.5/x86_64	
-			then COMPILER=@FINKPREFIX@/%p/var/lib/fink/path-prefix-10.6/g++-4.2,' \
+			then COMPILER=@FINKPREFIX@/%p/var/lib/fink/path-prefix-10.6/g++-4.2
 			# default compilers on on powerpc and i386 build with proper arch.
 			else COMPILER=/usr/bin/g++-4.2
 		fi ;;
