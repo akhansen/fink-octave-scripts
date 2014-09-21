@@ -1,0 +1,9 @@
+#!/bin/sh
+printf "Registering %s package with Octave-%s..." @PKG@ @OCTVERS@
+if [ -s @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages ] && [ -f @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages ] ; then 
+ 	`which xvfb-run` @FINKPREFIX@/share/octave/@OCTVERS@/@PKG@/octave-forge-postinst
+else
+	rm -rf @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages
+ 	cp @FINKPREFIX@/share/octave/@OCTVERS@/packages/@PKG@-@PKGVERS@/octave_packages @FINKPREFIX@/var/octave/@OCTVERS@/octave_packages
+fi
+printf "Done.\n"
