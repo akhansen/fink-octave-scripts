@@ -1,4 +1,8 @@
-2014-10-04	0.3.1	Add mkoctfile script so that we can use an alternative compiler
+2014-10-23	0.3.2.1	Fix compiler wrappers to know about Yosemite.
+
+2014-10-23	0.3.2	Fix compiler wrappers to know about Yosemite.
+
+2014-10-22	0.3.1	Add mkoctfile script so that we can use an alternative compiler
 					on Octave 3.8.0 and later.
 
 2014-05-06  0.3.0   Put the oct-cc and oct-cxx wrappers in this package.  Not released

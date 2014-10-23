@@ -1,7 +1,7 @@
 #!/bin/sh
 osversion=`uname -r | cut -d. -f1`
 case $osversion in
-	1[123]) 
+	1[1234]) 
 		COMPILER=@FINKPREFIX@/var/lib/fink/path-prefix-clang/cc ;;
 	10) 
 		COMPILER=@FINKPREFIX@/var/lib/fink/path-prefix-10.6/cc ;;
