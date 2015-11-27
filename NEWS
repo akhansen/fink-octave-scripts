@@ -1,3 +1,5 @@
+2015-11-26	0.4.0	Stop supporting ancient Octave versions (< 3.4)
+
 2015-10-05	0.3.4   Support 10.11.
 
 2014-10-23	0.3.3	Even though I'm not personally supporting 10.5 right now, fix
