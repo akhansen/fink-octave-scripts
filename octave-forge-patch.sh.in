@@ -17,13 +17,8 @@ for scriptfile in octave-forge-install.sh octave-forge-inst \
 	sed -e $subst1 -e $subst2 -e $subst3 -e $subst4 -e $subst5 @FINKPREFIX@/share/fink-octave-scripts/$scriptfile.in > $scriptfile
 	chmod a+x $scriptfile
 done
-if [[ "$octvers" > "3.4.0" ]] ; then
-	oc_shell_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-compile-3.4.3.sh.in"
-	oc_oct_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-comp-3.4.3.in"
-else
-	oc_shell_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-compile-3.0.5.sh.in"
-	oc_oct_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-comp-3.0.5.in"
-fi
+oc_shell_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-compile-3.4.3.sh.in"
+oc_oct_script="@FINKPREFIX@/share/fink-octave-scripts/octave-forge-comp-3.4.3.in"
 sed -e $subst1 -e $subst3 -e $subst4 -e $subst6 $oc_shell_script > octave-forge-compile.sh
 sed -e $subst1 -e $subst3 -e $subst6 $oc_oct_script > octave-forge-comp
 sed -e $subst3 -e $subst4 @FINKPREFIX@/share/fink-octave-scripts/genmkoctfile.sh.in > genmkoctfile.sh

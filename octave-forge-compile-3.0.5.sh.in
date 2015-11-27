@@ -1,4 +1,0 @@
-#!/bin/sh -ev
-cd ..
-mkdir -p bld/share/octave/@OCTVERS@/packages bld/lib/octave/@OCTVERS@/packages
-`which xvfb-run` @BUILDDIR@/octave-forge-comp
