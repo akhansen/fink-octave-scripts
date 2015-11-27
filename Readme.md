@@ -26,16 +26,16 @@ which is used to generate **mkoctfile-3XY-gcc4.N** and **mkoctfile-gcc4.N** exec
 when a gcc4N different than that which Octave was built with is required.  It takes the
 major version of the compiler, e.g. 4.8, as an argument.
 
-* **octave-forge-compile-(3.0.5|3.4.3).sh.in**:  Template for the compile phase shell script.
-One of these gets converted by **octave-forge-patch.sh** to **octave-forge-compile.sh**; 
-which one depends on the Octave version the package is being installed for--Octave 3.4.0 
-and later only support installation from an archive. **octave-forge-compile.sh** performs
-some file system operations and creates a post-patch tarball if installing for 
-Octave-3.4.3 or later, then invokes **octave-forge-comp**.
+* **octave-forge-compile-3.4.3.sh.in**:  Template for the compile phase shell script.
+This converted by **octave-forge-patch.sh** to **octave-forge-compile.sh**; 
+**octave-forge-compile.sh** performs some file system operations and creates a post-patch
+tarball, then invokes **octave-forge-comp**.  3.4.3 refers to the first Fink Octave 
+version where this methodology is used.  If upstream changes how the package manager 
+works at some point, we'll add an appropriate script (the scripts which work with 
+Octave 3.0 and 3.2 have been removed for efficiency in this version of fink-octave-scripts).
 
-* **octave-forge-comp-(3.0.5|3.4.3).in**:  Template for the compile phase Octave script. One 
-of these gets converted to **octave-forge-comp**; again, which one depends on the Octave 
-version the package is being installed for.  This runs the package's internal build 
+* **octave-forge-comp-3.4.3.in**:  Template for the compile phase Octave script. This
+ gets converted to **octave-forge-comp**, which runs the package's internal build 
 procedure and installs it in a temporary location ( **%b../bld** ) with a temporary database 
 ( **bld/share/octave/\<octave version\>/octave\_packages** ).
 
@@ -70,7 +70,8 @@ which removes the package's entry from global Octave package database.
 
 * **oct-cc** and **oct-cxx**:  Fink's Octave packages encode "oct-cc" and "oct-cxx" as the names of the compilers
 for Octave to use, because the proper compiler changes around a lot between OS X versions (and sometimes even 
-within an OS X version).  These scripts select the proper Fink compiler wrapper for the running OS.
+within an OS X version).  These scripts select the proper Fink compiler wrapper for the running OS.  We are likely to
+switch to just "clang" and "clang++" in Octave at a future date.
 
 ## Usage:
 
